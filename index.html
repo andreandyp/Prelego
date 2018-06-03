@@ -1,0 +1,21 @@
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Videoconferencia</title>
+	<script src="/js/adapter.js"></script>
+	<script src="/js/simplewebrtc.js"></script>
+	<script src="/js/socket.io.js"></script>
+	<script src="/js/app.js" defer></script>
+</head>
+<body>
+	<h1>Chat mamalon</h1>
+	<input id="prueba" type="button" value="Prueba">
+	<input id="ajeno" type="button" value="Ajeno">
+	<h2>Conferencista</h2>
+	<video height="480" id="conferencista"></video>
+	<h2>Invitado</h2>
+	<div id="invitado"></div>
+	<video height="480" id="recibidor"></video>
+</body>
+</html>
