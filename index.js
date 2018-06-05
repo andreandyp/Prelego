@@ -54,14 +54,10 @@ io.on("connection", socket => {
 			const element = streams[n];
 			if(element.id === socket.id){
 				streams.splice(n, 1);
+				console.log("Cliente de video dejó de transmitir");
 				break;
 			}
 		}
-	});
-
-	socket.on("prueba", mensaje => {
-		console.log("mensaje recibido: " + mensaje);
-		socket.broadcast.emit("respuesta", "También con socket");
 	});
 });
 https.listen(port, () => console.log(`Servidor iniciado en https://localhost:${port}/`));

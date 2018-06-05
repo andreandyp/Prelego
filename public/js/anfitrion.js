@@ -20,13 +20,14 @@ webrtc.on("channelMessage", (peer, label, data) => {
 });
 
 const modalSala = qs("#modalSala");
-modalSala.addEventListener("click", () => {
+modalSala.addEventListener("click", e => {
+	e.preventDefault();
+	
 	let anfitrion = localStorage.getItem("anfitrion");
 	let sala = qs("#sala").value;
 	webrtc.joinRoom(anfitrion+"---"+sala);
 	socket.emit("nuevo-stream", anfitrion+"---"+sala);
 	qs(".modal").classList.remove("is-active");
 	qs("#enlace").innerText = `https://prelego.herokuapp.com/ver/${anfitrion}/${sala}`;
-	console.log("Anfitrión sala: " + anfitrion+"---"+sala);
-	//webrtc.startLocalVideo();
+	webrtc.startLocalVideo();
 }, false);

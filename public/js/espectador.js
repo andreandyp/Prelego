@@ -2,7 +2,6 @@ const socket = io.connect("https://localhost:1337");
 
 const webrtc = new SimpleWebRTC({
 	localVideoEl: "local",
-	remoteVideoEl: "",
 	autoRequestMedia: false,
 	socketio: socket
 });
@@ -47,8 +46,13 @@ solicitud.addEventListener("click", () => {
 });
 
 const modalApodo = qs("#modalApodo");
-modalApodo.addEventListener("click", () => {
+modalApodo.addEventListener("click", e => {
+	e.preventDefault();
 	localStorage.setItem("apodo", qs("#apodo").value);
 	qs(".modal").classList.remove("is-active");
 	webrtc.joinRoom(localStorage.getItem("sala"));
 }, false);
+
+webrtc.on("videoAdded", video => {
+	document.getElementById("remoto").appendChild(video);
+});

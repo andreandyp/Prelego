@@ -12,7 +12,7 @@ html(lang="es")
 		.columns.has-text-centered
 			.column
 				p Anfitrión
-				video#remoto
+				#remoto
 			.column
 				p Chat
 				#chat
@@ -29,8 +29,8 @@ html(lang="es")
 			.modal-background
 			.modal-content.box
 				h3.title.has-text-centered Escoge un apodo para el chat
-				div.field.has-addons
+				form.field.has-addons
 					p.control
 						input#apodo.input.is-rounded(type="text" placeholder="Apodo")
 					p.control
-						button#modalApodo.input.is-success.is-rounded Aceptar
+						input#modalApodo.button.is-primary.is-rounded(type="submit" value="Aceptar")
