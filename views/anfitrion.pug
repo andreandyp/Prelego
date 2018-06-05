@@ -1,0 +1,24 @@
+html(lang="es")
+	head
+		include ./meta.pug
+		title Transmitiendo en vivo...
+		script(src="/js/adapter.js")
+		script(src="/js/simplewebrtc.js")
+		script(src="/js/socket.io.js")
+		script(src="/js/anfitrion.js" defer)
+	body
+		.columns.has-text-centered
+			.column
+				p Tu transmisión
+				video#local
+			.column
+				p Chat
+				#chat
+			.column
+				p Invitado
+				video#remoto
+			#solicitantes.column
+				button.button.is-success Aceptar invitados
+		.container.has-text-centered
+			h1.title ¡Comparte el enlace!
+			p https://prelego.herokuapp.com/ver/andy/jugar

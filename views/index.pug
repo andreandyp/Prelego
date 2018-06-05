@@ -1,0 +1,21 @@
+html(lang="es")
+	head
+		include ./meta.pug
+		title Prelego
+	body
+		div.container.has-text-centered
+			h1.title.is-1 Bienvenido a Prelego
+			h2.subtitle Transmisiones en vivo sencillas
+			div.columns
+				div.column
+					p Entra a una tranmisión en vivo
+					div.field.has-addons
+						p.control
+							input#anfitrion.input.is-rounded(type="text" placeholder="Anfitrión")
+						p.control
+							button.button.is-static /
+						p.control
+							input#sala.input.is-rounded(type="text" placeholder="Sala")
+					button.button.is-primary Entrar a la transmisión
+				div.column
+					p Regístrate para comenzar una transmisión

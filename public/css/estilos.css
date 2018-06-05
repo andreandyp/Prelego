@@ -1,0 +1,7 @@
+#chat{
+	height: 80%;
+	overflow-y: auto;
+}
+.modal-content{
+	background-color: white;
+}
