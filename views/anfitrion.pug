@@ -6,6 +6,8 @@ html(lang="es")
 		script(src="/js/simplewebrtc.js")
 		script(src="/js/socket.io.js")
 		script(src="/js/anfitrion.js" defer)
+		script.
+			localStorage.setItem("anfitrion", "#{anfitrion}");
 	body
 		.columns.has-text-centered
 			.column
@@ -21,4 +23,13 @@ html(lang="es")
 				button.button.is-success Aceptar invitados
 		.container.has-text-centered
 			h1.title ¡Comparte el enlace!
-			p https://prelego.herokuapp.com/ver/andy/jugar
+			p#enlace
+		.modal
+			.modal-background
+			.modal-content.box
+				h3.title.has-text-centered Escribe el nombre de la sala que quieres iniciar
+				div.field.has-addons
+					p.control
+						input#sala.input.is-rounded(type="text" placeholder="Nombre de la sala")
+					p.control
+						button#modalSala.input.is-success.is-rounded Aceptar

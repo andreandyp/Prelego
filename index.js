@@ -28,15 +28,36 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => res.render("index"));
 app.get("/transmitir", (req, res) => {
-	res.render("anfitrion", {});
+	res.render("anfitrion", {anfitrion: "andre"});
 });
 app.get("/ver/:usuario/:sala", (req, res) => {
 	res.render("espectador", {sala: req.params.usuario+"---"+req.params.sala});
 });
 
+var streams = [];
+
 io.on("connection", socket => {
 	console.log("Nuevo cliente");
 	socket.on("chat", mensaje => io.emit("chat", mensaje));
+	socket.on("nuevo-stream", nombre =>{
+		console.log("Cliente transmitiendo");
+		let stream = {
+			socketID: socket.id,
+			sala: nombre
+		};
+		streams.push(stream);
+	});
+
+	socket.on("disconnect", () => {
+		console.log("Cliente desconectado");
+		for (let n = 0; n < streams.length; n++) {
+			const element = streams[n];
+			if(element.id === socket.id){
+				streams.splice(n, 1);
+				break;
+			}
+		}
+	});
 
 	socket.on("prueba", mensaje => {
 		console.log("mensaje recibido: " + mensaje);

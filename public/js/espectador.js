@@ -16,17 +16,25 @@ enviarMsj.addEventListener("click", e => {
 	const mensajeChat = qs("#mensaje").value;
 	qs("#mensaje").value = "";
 
-	socket.emit("chat", `Andy: ${mensajeChat}`);
-}, false);
-
-socket.on("chat", mensaje => {
 	var mensajeEl = document.createElement("div");
 	var texto = document.createElement("span");
-	texto.textContent = mensaje;
+	texto.textContent = `${localStorage.getItem("apodo")}: ${mensajeChat}`;
 	mensajeEl.appendChild(texto);
+	document.querySelector("#chat").appendChild(mensajeEl);
 
-	qs("#chat").appendChild(mensajeEl);
-	qs("#chat").scrollTop = qs("#chat").scrollHeight;
+	webrtc.sendDirectlyToAll("meta", "chateo", {
+		mensaje: `${localStorage.getItem("apodo")}: ${mensajeChat}`
+	});
+}, false);
+
+webrtc.on("channelMessage", (peer, label, data) => {
+	if (data.type === "chateo") {
+		var mensajeEl = document.createElement("div");
+		var texto = document.createElement("span");
+		texto.textContent = data.payload.mensaje;
+		mensajeEl.appendChild(texto);
+		document.querySelector("#chat").appendChild(mensajeEl);
+	}
 });
 
 const solicitud = qs("#solicitud");
@@ -40,6 +48,7 @@ solicitud.addEventListener("click", () => {
 
 const modalApodo = qs("#modalApodo");
 modalApodo.addEventListener("click", () => {
-	localStorage.setItem("apodo", qs("#modalApodo").value);
+	localStorage.setItem("apodo", qs("#apodo").value);
 	qs(".modal").classList.remove("is-active");
+	webrtc.joinRoom(localStorage.getItem("sala"));
 }, false);
