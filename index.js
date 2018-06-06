@@ -8,15 +8,19 @@ const app = express();
 //Consigue tus propios certificados SSL si quieres probar en localhost
 //Es necesario para usar WebRTC
 var opciones = {};
+var http;
 if(process.env.NODE_ENV !== "production"){
 	opciones = {
 		key: fs.readFileSync("./certificados/server.key"),
 		cert: fs.readFileSync("./certificados/server.crt")
 	};
+	http = require("https").createServer(opciones, app);
+}
+else{
+	http = require("http").createServer(opciones, app);
 }
 
-const https = require("https").createServer(opciones, app);
-const io = require("socket.io")(https);
+const io = require("socket.io")(http);
 
 const port = process.env.PORT || 1337;
 app.set("port", port);
