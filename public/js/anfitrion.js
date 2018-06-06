@@ -20,8 +20,18 @@ webrtc.on("channelMessage", (peer, label, data) => {
 	else if(data.type === "nuevo-invitado"){
 		let usuario = crearEl("div");
 		let boton = crearEl("button");
-		boton.classList.add("button", "is-primary");
+		boton.classList.add("button", "is-primary", "solicitud-invitado");
 		boton.textContent = data.payload.usuario;
+		boton.addEventListener("click", function() {
+			webrtc.sendDirectlyToAll("meta", "intervenir", {
+				usuario: this.textContent
+			});
+			setTimeout(() => {
+				webrtc.stopLocalVideo();
+				webrtc.startLocalVideo();
+			}, 2000);
+			
+		}, false);
 		usuario.appendChild(boton);
 		qs("#remoto").appendChild(usuario);
 	}
@@ -56,11 +66,20 @@ aceptarInvi.addEventListener("click", () => {
 }, false);
 
 webrtc.on("readyToCall", () => {
-	console.log("readytocall");
 	let anfitrion = localStorage.getItem("anfitrion");
 	let sala = qs("#sala").value;
 	socket.emit("nuevo-stream", anfitrion + "---" + sala);
 	qs("#enlace").innerText = `https://prelego.herokuapp.com/ver/${anfitrion}/${sala}`;
 	localStorage.setItem("sala-anfitrion", anfitrion+"---"+sala);
 	webrtc.joinRoom(anfitrion + "---" + sala);
+});
+
+webrtc.on("videoAdded", video => {
+	console.log("addes");
+	let invitado = qs("#remoto");
+	while (invitado.firstChild) {
+		invitado.removeChild(invitado.firstChild);
+	}
+	console.log("fin whiñe");
+	qs("#remoto").appendChild(video);
 });

@@ -41,6 +41,10 @@ webrtc.on("channelMessage", (peer, label, data) => {
 			solicitud.classList.remove("is-success");
 			solicitud.innerText = "Espera a que el anfitrión acepte invitados";
 		}
+	} else if(data.type === "intervenir"){
+		if(data.payload.usuario === webrtc.config.nick){
+			webrtc.startLocalVideo();
+		}
 	}
 });
 
