@@ -52,7 +52,7 @@ io.on("connection", socket => {
 		console.log("Cliente desconectado");
 		for (let n = 0; n < streams.length; n++) {
 			const element = streams[n];
-			if(element.id === socket.id){
+			if (element.socketID === socket.id) {
 				streams.splice(n, 1);
 				console.log("Cliente de video dejó de transmitir");
 				break;
