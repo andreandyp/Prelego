@@ -15,8 +15,10 @@ if(process.env.NODE_ENV !== "production"){
 		cert: fs.readFileSync("./certificados/server.crt")
 	};
 	http = require("https").createServer(opciones, app);
+	console.log("No producción");
 }
 else{
+	console.log("Producción");
 	http = require("http").createServer(opciones, app);
 }
 
@@ -67,4 +69,4 @@ io.on("connection", socket => {
 		}
 	});
 });
-https.listen(port, () => console.log(`Servidor iniciado en https://localhost:${port}/`));
+http.listen(port, () => console.log(`Servidor iniciado en https://localhost:${port}/`));
