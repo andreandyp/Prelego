@@ -26,7 +26,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => res.render("index"));
+app.get("/", (req, res) => {
+	console.log("ruta /");
+	res.render("index");
+});
 app.get("/transmitir", (req, res) => {
 	res.render("anfitrion", {anfitrion: "andre"});
 });
