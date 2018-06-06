@@ -1,4 +1,4 @@
-const socket = io.connect("https://localhost:1337");
+const socket = io.connect("https://localhost:16562");
 
 var webrtc = new SimpleWebRTC({
 	localVideoEl: "local",

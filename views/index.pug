@@ -2,6 +2,12 @@ html(lang="es")
 	head
 		include ./meta.pug
 		title Prelego
+		script(defer).
+			document.querySelector("#ir").addEventListener("click", () => {
+				let anfi = document.querySelector("#anfitrion").value;
+				let sala = document.querySelector("#sala").value;
+				window.history.pushState( {} , 'bar', `https://prelego.herokuapp.com/${sala}/${anfitrion}` );
+			});
 	body
 		div.container.has-text-centered
 			h1.title.is-1 Bienvenido a Prelego
@@ -16,6 +22,6 @@ html(lang="es")
 							button.button.is-static /
 						p.control
 							input#sala.input.is-rounded(type="text" placeholder="Sala")
-					button.button.is-primary Entrar a la transmisión
+					button#ir.button.is-primary Entrar a la transmisión
 				div.column
 					p Regístrate para comenzar una transmisión

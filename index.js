@@ -19,7 +19,7 @@ if(process.env.NODE_ENV !== "production"){
 }
 else{
 	console.log("Producción");
-	http = require("http").createServer(opciones, app);
+	http = require("http").Server(app);
 }
 
 const io = require("socket.io")(http);
