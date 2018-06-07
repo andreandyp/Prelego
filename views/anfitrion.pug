@@ -9,6 +9,9 @@ html(lang="es")
 		script.
 			localStorage.setItem("anfitrion", "#{anfitrion}");
 	body
+		.container.has-text-centered
+			p ¡Comparte el enlace!
+				p#enlace
 		.columns.has-text-centered
 			.column
 				p Tu transmisión
@@ -21,9 +24,7 @@ html(lang="es")
 				#remoto
 			#solicitantes.column
 				button#aceptarInvitados.button.is-success Aceptar invitados
-		.container.has-text-centered
-			h1.title ¡Comparte el enlace!
-			p#enlace
+		
 		.modal
 			.modal-background
 			.modal-content.box

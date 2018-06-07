@@ -36,8 +36,8 @@ app.get("/", (req, res) => {
 	console.log("ruta /");
 	res.render("index");
 });
-app.get("/transmitir", (req, res) => {
-	res.render("anfitrion", {anfitrion: "andre"});
+app.get("/transmitir/:anfitrion", (req, res) => {
+	res.render("anfitrion", {anfitrion: req.params.anfitrion});
 });
 app.get("/ver/:usuario/:sala", (req, res) => {
 	res.render("espectador", {sala: req.params.usuario+"---"+req.params.sala});

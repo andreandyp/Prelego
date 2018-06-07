@@ -1,4 +1,4 @@
-const socket = io.connect("https://localhost:16562");
+const socket = io.connect("https://localhost:1337");
 
 var webrtc = new SimpleWebRTC({
 	localVideoEl: "local",
@@ -43,12 +43,7 @@ webrtc.on("channelMessage", (peer, label, data) => {
 		}
 	} else if(data.type === "intervenir"){
 		if(data.payload.usuario === webrtc.config.nick){
-			webrtc = new SimpleWebRTC({
-				localVideoEl: "local",
-				autoRequestMedia: true,
-				socketio: socket
-			});
-			webrtc.joinRoom(localStorage.getItem("sala"));
+			webrtc.startLocalVideo();
 		}
 	}
 });
